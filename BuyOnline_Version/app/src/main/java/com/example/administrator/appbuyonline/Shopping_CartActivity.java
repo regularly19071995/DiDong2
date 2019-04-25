@@ -99,7 +99,7 @@ public class Shopping_CartActivity extends AppCompatActivity {
         long tongtien = 0;
         for(int i = 0; i < MainActivity.mangGioHang.size(); i++)
         {
-            tongtien+= MainActivity.mangGioHang.get(i).getGiasp();
+            tongtien += MainActivity.mangGioHang.get(i).getGiasp();
         }
         DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
         txtTongTien.setText(decimalFormat.format(tongtien)+"Đ");

@@ -46,18 +46,18 @@ public class ChiTietSanPham extends AppCompatActivity {
             public void onClick(View view) {
                 if(MainActivity.mangGioHang.size() > 0){
                     int sl = Integer.parseInt(spChiTiet.getSelectedItem().toString());
-                    boolean exit = false;
+                    boolean exists = false;
                     for(int i = 0; i< MainActivity.mangGioHang.size(); i++){
                         if(MainActivity.mangGioHang.get(i).getIdsp() == id){
                             MainActivity.mangGioHang.get(i).setSoluongsp(MainActivity.mangGioHang.get(i).getSoluongsp() + sl);
                             if(MainActivity.mangGioHang.get(i).getSoluongsp() >= 10){
                                 MainActivity.mangGioHang.get(i).setSoluongsp(10);
                             }
-                            MainActivity.mangGioHang.get(i).setGiasp(gia + MainActivity.mangGioHang.get(i).getSoluongsp());
-                            exit = true;
+                            MainActivity.mangGioHang.get(i).setGiasp(gia * MainActivity.mangGioHang.get(i).getSoluongsp());
+                            exists = true;
                         }
                     }
-                    if(exit = false){
+                    if(exists == false){
                         int soluong = Integer.parseInt(spChiTiet.getSelectedItem().toString());
                         long giamoi = soluong * gia;
                         MainActivity.mangGioHang.add(new GioHang(id,ten,giamoi,hinhanh,soluong));
@@ -117,7 +117,7 @@ public class ChiTietSanPham extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu,menu);
-        return super.onCreateOptionsMenu(menu);
+        return true;
     }
 
     @Override

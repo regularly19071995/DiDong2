@@ -60,21 +60,7 @@ public class LaptopActivity extends AppCompatActivity {
         }
 
     }
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu,menu);
-        return super.onCreateOptionsMenu(menu);
-    }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
-            case R.id.mGioHang:
-                Intent intent = new Intent(getApplicationContext(),Shopping_CartActivity.class);
-                startActivity(intent);
-        }
-        return super.onOptionsItemSelected(item);
-    }
     private void LoadMoreData() {
         lvLaptop.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -91,8 +77,8 @@ public class LaptopActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onScroll(AbsListView absListView, int firtItem, int visibleItem, int totallItem) {
-                if(firtItem + visibleItem == totallItem && totallItem != 0 && isLoading == false && limitData == false){
+            public void onScroll(AbsListView absListView, int i, int i1, int i2) {
+                if(i + i1 == i2 && i2 != 0 && isLoading == false && limitData == false){
                     isLoading = true;
                     Thread thread = new Thread();
                     thread.start();
@@ -100,6 +86,23 @@ public class LaptopActivity extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.mGioHang:
+                Intent intent = new Intent(getApplicationContext(),Shopping_CartActivity.class);
+                startActivity(intent);
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
     private void ActionToolBar() {
         setSupportActionBar(toolbarLaptop);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
