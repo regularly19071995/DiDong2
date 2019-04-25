@@ -41,7 +41,7 @@ public class LaptopActivity extends AppCompatActivity {
     int page = 1;
     View footerView;
     boolean isLoading = false;
-    LaptopActivity.mHandler mHandler;
+    mHandler mHandler;
     boolean limitData = false;
 
     @Override
@@ -110,6 +110,11 @@ public class LaptopActivity extends AppCompatActivity {
             }
         });
     }
+
+    private void GetIDLoaisp() {
+        idLaptop = getIntent().getIntExtra("idLoaisanpham",-1);
+        Log.d("giatriLoaisanpham",idLaptop+"");
+    }
     private void AnhXa() {
         toolbarLaptop = findViewById(R.id.tbLaptop);
         lvLaptop = findViewById(R.id.lvLaptop);
@@ -120,10 +125,7 @@ public class LaptopActivity extends AppCompatActivity {
         footerView = inflater.inflate(R.layout.progressbar,null);
         mHandler = new mHandler();
     }
-    private void GetIDLoaisp() {
-        idLaptop = getIntent().getIntExtra("idLoaisanpham",-1);
-        Log.d("giatriLoaisanpham",idLaptop+"");
-    }
+
 
     private void GetData(int Page) {
         final RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
@@ -196,7 +198,7 @@ public class LaptopActivity extends AppCompatActivity {
         public void run() {
             mHandler.sendEmptyMessage(0);
             try {
-                DienThoaiActivity.Thread.sleep(3000);
+                Thread.sleep(3000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
