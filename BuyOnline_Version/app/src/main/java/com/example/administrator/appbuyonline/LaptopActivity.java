@@ -41,15 +41,15 @@ public class LaptopActivity extends AppCompatActivity {
     int page = 1;
     View footerView;
     boolean isLoading = false;
-    mHandler mHandler;
     boolean limitData = false;
-
+    mHandler mHandler;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_laptop);
-        AnhXa();
+
         if(CheckConnection.haveNetworkConnection(getApplicationContext())){
+            AnhXa();
             GetIDLoaisp();
             ActionToolBar();
             GetData(page);
