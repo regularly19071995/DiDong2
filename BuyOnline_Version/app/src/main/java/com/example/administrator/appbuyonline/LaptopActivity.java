@@ -40,20 +40,19 @@ public class LaptopActivity extends AppCompatActivity {
     int idLaptop = 0;
     int page = 1;
     View footerView;
-    boolean isLoading = false;
-    boolean limitData = false;
+    boolean isLoadingLaptop = false;
+    boolean limitDataLaptop = false;
     mHandler mHandler;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_laptop);
-
+        AnhXa();
         if(CheckConnection.haveNetworkConnection(getApplicationContext())){
-            AnhXa();
             GetIDLoaisp();
             ActionToolBar();
             GetData(page);
-            LoadMoreData();
+            LoadData();
         }else{
             CheckConnection.showToast_Short(getApplicationContext(),"Bạn hãy kiểm tra lại kết nối internet");
             finish();
@@ -61,7 +60,7 @@ public class LaptopActivity extends AppCompatActivity {
 
     }
 
-    private void LoadMoreData() {
+    private void LoadData() {
         lvLaptop.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -78,8 +77,8 @@ public class LaptopActivity extends AppCompatActivity {
 
             @Override
             public void onScroll(AbsListView absListView, int i, int i1, int i2) {
-                if(i + i1 == i2 && i2 != 0 && isLoading == false && limitData == false){
-                    isLoading = true;
+                if(i + i1 == i2 && i2 != 0 && isLoadingLaptop == false && limitDataLaptop == false){
+                    isLoadingLaptop = true;
                     Thread thread = new Thread();
                     thread.start();
                 }
@@ -148,20 +147,20 @@ public class LaptopActivity extends AppCompatActivity {
                         JSONArray jsonArray = new JSONArray(response);
                         for(int i =0 ; i < jsonArray.length(); i++){
                             JSONObject jsonObject = jsonArray.getJSONObject(i);
-                            idLaptop = jsonObject.getInt("id");
+                            id = jsonObject.getInt("id");
                             tenLaptop = jsonObject.getString("tensp");
                             giaLaptop  = jsonObject.getInt("giasp");
                             hinhanhLaptop = jsonObject.getString("hinhanhsp");
                             motaLaptop = jsonObject.getString("motasp");
                             IDLaptop = jsonObject.getInt("idsanpham");
-                            mangLaptop.add(new SanPham(idLaptop,tenLaptop,giaLaptop,hinhanhLaptop,motaLaptop,IDLaptop));
+                            mangLaptop.add(new SanPham(id,tenLaptop,giaLaptop,hinhanhLaptop,motaLaptop,IDLaptop));
                             laptopAdapter.notifyDataSetChanged();
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
                 }else{
-                    limitData = true;
+                    limitDataLaptop = true;
                     lvLaptop.removeFooterView(footerView);
                     CheckConnection.showToast_Short(getApplicationContext(),"Da het du lieu");
                 }
@@ -190,7 +189,7 @@ public class LaptopActivity extends AppCompatActivity {
                     break;
                 case 1:
                     GetData(++page);
-                    isLoading = false;
+                    isLoadingLaptop = false;
                     break;
             }
             super.handleMessage(msg);

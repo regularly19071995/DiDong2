@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".LaptopActivity"
     android:orientation="vertical">
+
     <android.support.v7.widget.Toolbar
         android:background="@android:color/darker_gray"
         app:titleTextColor="@android:color/holo_purple"
